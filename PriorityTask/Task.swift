@@ -118,8 +118,19 @@ class TaskList {
         tasks = array.map {dict in Task(dictionary: dict)} //Initialize tasks by mapping each dictionary in the JSON to through Task's initializer.
     }
     
-    //Just make a new task list without loading anything.
-    init() {
-        tasks = []
+    //Just make a new task list with some tasks without loading anything.
+    init(tasks: [Task]) {
+        self.tasks = tasks
     }
+    
+    //Either init from the standard file if it exists, or just make a new blank task list.
+    convenience init() {
+        if FileManager.default.fileExists(atPath: TaskList.standardStorageURL.path) {
+            self.init(url: TaskList.standardStorageURL)
+        } else {
+            self.init(tasks: [])
+        }
+    }
+    
+    
 }

@@ -9,11 +9,25 @@
         <!--PriorityTask-->
         <scene sceneID="P8S-3E-rG9">
             <objects>
-                <tableViewController storyboardIdentifier="ListViewController" id="03F-AW-wxW" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="ListViewController" id="03F-AW-wxW" customClass="ListViewController" customModule="PriorityTask" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="83" sectionHeaderHeight="28" sectionFooterHeight="28" id="aJF-AK-xqd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="PtI-ne-gFc">
+                            <rect key="frame" x="0.0" y="175" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Tasks. Tap &quot;+&quot; to add a task." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJg-SG-n08">
+                                    <frame key="frameInset" minX="65" minY="12" width="245" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Task" textLabel="RX0-hV-ggb" detailTextLabel="aG9-MU-m4H" rowHeight="83" style="IBUITableViewCellStyleSubtitle" id="Icz-Bs-jnj">
                                 <rect key="frame" x="0.0" y="92" width="375" height="83"/>
@@ -92,7 +106,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="xTM-OC-xHS">
-                                                    <frame key="frameInset" minY="-87" height="216"/>
+                                                    <frame key="frameInset" minX="-1" minY="-87" height="216" maxX="1"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <date key="date" timeIntervalSinceReferenceDate="496361741.085338">
                                                         <!--2016-09-23 22:15:41 +0000-->
