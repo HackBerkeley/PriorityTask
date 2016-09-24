@@ -16,6 +16,7 @@
 		A32AE6D51D95C5AC00724D95 /* PriorityTaskUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32AE6D41D95C5AC00724D95 /* PriorityTaskUITests.swift */; };
 		A32AE6E31D95C7B400724D95 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32AE6E21D95C7B400724D95 /* Task.swift */; };
 		A32B784F1D95E7BC009935E9 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32B784E1D95E7BC009935E9 /* ListViewController.swift */; };
+		A32B78511D95ECA1009935E9 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A32B78501D95ECA1009935E9 /* TaskViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		A32AE6D61D95C5AC00724D95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A32AE6E21D95C7B400724D95 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		A32B784E1D95E7BC009935E9 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		A32B78501D95ECA1009935E9 /* TaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				A32AE6B61D95C5AC00724D95 /* ViewController.swift */,
 				A32AE6E21D95C7B400724D95 /* Task.swift */,
 				A32B784E1D95E7BC009935E9 /* ListViewController.swift */,
+				A32B78501D95ECA1009935E9 /* TaskViewController.swift */,
 				A32AE6B81D95C5AC00724D95 /* Main.storyboard */,
 				A32AE6BB1D95C5AC00724D95 /* Assets.xcassets */,
 				A32AE6BD1D95C5AC00724D95 /* LaunchScreen.storyboard */,
@@ -270,6 +273,7 @@
 			files = (
 				A32AE6B71D95C5AC00724D95 /* ViewController.swift in Sources */,
 				A32AE6E31D95C7B400724D95 /* Task.swift in Sources */,
+				A32B78511D95ECA1009935E9 /* TaskViewController.swift in Sources */,
 				A32B784F1D95E7BC009935E9 /* ListViewController.swift in Sources */,
 				A32AE6B51D95C5AC00724D95 /* AppDelegate.swift in Sources */,
 			);

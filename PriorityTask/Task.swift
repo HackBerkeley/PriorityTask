@@ -12,6 +12,7 @@ protocol DictionaryConvertibleValue {}
 
 extension String : DictionaryConvertibleValue {}
 extension NSNumber : DictionaryConvertibleValue {}
+extension Float : DictionaryConvertibleValue {}
 extension Double : DictionaryConvertibleValue {}
 extension Array where Element:DictionaryConvertibleValue {}
 //See https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-ID277
@@ -28,7 +29,7 @@ class Task : Comparable, DictionaryConvertible {
     let UUID : String
     var name : String
     var dueDate : Date
-    var prioirty : Double
+    var prioirty : Float
     
     //Creates a new task with default values.
     init() {
@@ -39,7 +40,7 @@ class Task : Comparable, DictionaryConvertible {
     }
     
     var weightedPriority : Double {
-        return prioirty * dueDate.timeIntervalSinceNow
+        return Double(prioirty) * dueDate.timeIntervalSinceNow
     }
     
     public static func ==(lhs: Task, rhs: Task) -> Bool {
@@ -64,7 +65,7 @@ class Task : Comparable, DictionaryConvertible {
         UUID = dictionary["UUID"] as! String
         name = dictionary["name"] as! String
         dueDate = Date(timeIntervalSinceReferenceDate: dictionary["dueDate"] as! TimeInterval)
-        prioirty = dictionary["priority"] as! Double
+        prioirty = dictionary["priority"] as! Float
     }
 }
 
