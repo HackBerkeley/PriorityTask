@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TaskViewController: UITableViewController {
+class TaskViewController: UITableViewController, UITextFieldDelegate {
 
     var task : Task! //If there is no task, we are making a new one.
     var callback : ((Task?) -> Void)! //If there is a task argument, the caller should add it
@@ -25,6 +25,9 @@ class TaskViewController: UITableViewController {
         if task == nil {
             task = Task()
             createNewTask = true
+        } else {
+            //set our title to the task's original title
+            navigationItem.title = task.name
         }
         
         //set each field to the task's values
@@ -47,6 +50,11 @@ class TaskViewController: UITableViewController {
         task.prioirty = prioritySlider.value
         //call back with the task if this is the new task, otherwise just call back nil since we modified a task
         callback(createNewTask ? task : nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
 }

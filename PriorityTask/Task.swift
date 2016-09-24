@@ -10,22 +10,9 @@ import Foundation
 
 protocol DictionaryConvertibleValue {}
 
-extension String : DictionaryConvertibleValue {}
-extension NSNumber : DictionaryConvertibleValue {}
-extension Float : DictionaryConvertibleValue {}
-extension Double : DictionaryConvertibleValue {}
-extension Array where Element:DictionaryConvertibleValue {}
-//See https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Protocols.html#//apple_ref/doc/uid/TP40014097-CH25-ID277
-extension Dictionary where Value:DictionaryConvertibleValue {}
-
-protocol DictionaryConvertible: DictionaryConvertibleValue {
-    var dictionary : [String : DictionaryConvertibleValue] {get}
-    init(dictionary : [String : DictionaryConvertibleValue])
-}
-
 fileprivate let newTaskDelay : TimeInterval = 3600
 
-class Task : Comparable, DictionaryConvertible {
+class Task : Comparable {
     let UUID : String
     var name : String
     var dueDate : Date
@@ -39,8 +26,9 @@ class Task : Comparable, DictionaryConvertible {
         prioirty = 0.5
     }
     
-    var weightedPriority : Double {
-        return Double(prioirty) * dueDate.timeIntervalSinceNow
+    var weightedPriority : Double { //Lower weighted priority means sooner in the queue
+        let timeUntil = dueDate.timeIntervalSinceNow
+        return timeUntil - (fabs(timeUntil) * Double(prioirty) * 0.9)
     }
     
     public static func ==(lhs: Task, rhs: Task) -> Bool {
@@ -52,16 +40,16 @@ class Task : Comparable, DictionaryConvertible {
     }
     
     //Serialize as a dictionary
-    var dictionary: [String : DictionaryConvertibleValue] {
+    var dictionary: [String : Any] {
         return [
             "UUID": UUID,
             "name": name,
-            "dueDate": Date.timeIntervalSinceReferenceDate,
+            "dueDate": dueDate.timeIntervalSinceReferenceDate,
             "priority": prioirty
         ]
     }
     
-    required init(dictionary: [String : DictionaryConvertibleValue]) {
+    required init(dictionary: [String : Any]) {
         UUID = dictionary["UUID"] as! String
         name = dictionary["name"] as! String
         dueDate = Date(timeIntervalSinceReferenceDate: dictionary["dueDate"] as! TimeInterval)
@@ -115,7 +103,7 @@ class TaskList {
     init(url: URL) {
         let fileContents = try! Data(contentsOf: url) //Read the file data.
         let jsonData = try! JSONSerialization.jsonObject(with: fileContents, options: []) //Run the data through the JSON parser.
-        let array = jsonData as! Array<[String : DictionaryConvertibleValue]> //Assume the data is an array, and cast it
+        let array = jsonData as! Array<[String : Any]> //Assume the data is an array, and cast it
         tasks = array.map {dict in Task(dictionary: dict)} //Initialize tasks by mapping each dictionary in the JSON to through Task's initializer.
     }
     
