@@ -12,12 +12,6 @@ class ListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         updateNoTasksLabel()
     }
@@ -39,6 +33,8 @@ class ListViewController: UITableViewController {
         return tasks.orderedTasks.count //Let the table view know how many tasks there are
     }
     
+    //This is just a convenience function to quickly load the task view controller.
+    //It returns its surrounding view controller, as well as the more interesting table view controller
     private func loadTaskViewController() -> (UINavigationController, TaskViewController) {
         let nav = storyboard!.instantiateViewController(withIdentifier: "TaskViewController") as! UINavigationController
         let task = nav.viewControllers.first! as! TaskViewController
@@ -54,12 +50,14 @@ class ListViewController: UITableViewController {
         taskViewController.callback = {[weak self] (_)->Void in
             //save the tasklist since we just modified one of its members
             self?.tasks.save(url: TaskList.standardStorageURL)
+            //now that the task controller has said it's done, we can dismiss it
             nav.dismiss(animated: true) {
+                //when it's finished dismissing, animate the row move (if there is one) in the table view
                 guard let tasks = self?.tasks else {return}
                 let newIndex = tasks.orderedTasks.index(of: task)!
                 let newIndexPath = IndexPath(item: newIndex, section: 0)
                 tableView.moveRow(at: indexPath, to: newIndexPath)
-                tableView.reloadRows(at: [newIndexPath], with: .fade)
+                tableView.reloadRows(at: [newIndexPath], with: .fade) //reload the row in case any data changed
             }
         }
         
@@ -68,15 +66,14 @@ class ListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Task", for: indexPath)
-        
-        // Configure the cell...
-        
-        return cell
+        return cell //this is just a factory for cells
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let task = tasks.orderedTasks[indexPath.item]
+        //set the name
         cell.textLabel!.text = task.name
+        //set the date
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
         dateFormatter.timeStyle = .short
@@ -133,6 +130,7 @@ class ListViewController: UITableViewController {
                 tableView.insertRows(at: [IndexPath(item: i, section: 0)], with: .right)
             }
         }
+        
         showDetailViewController(nav, sender: nil)
     }
 }

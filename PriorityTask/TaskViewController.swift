@@ -52,6 +52,7 @@ class TaskViewController: UITableViewController, UITextFieldDelegate {
         callback(createNewTask ? task : nil)
     }
     
+    //this makes sure the keyboard hides when we hit done on the name field
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

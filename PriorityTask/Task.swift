@@ -49,6 +49,7 @@ class Task : Comparable {
         ]
     }
     
+    //Take the same kind of dictionary we serialize and re-initialize from it
     required init(dictionary: [String : Any]) {
         UUID = dictionary["UUID"] as! String
         name = dictionary["name"] as! String
